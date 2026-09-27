@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200" role="img" aria-label="Casa Matcha and Coffee">
+  <defs>
+    <path id="arcTop" d="M 30 100 A 70 70 0 0 1 170 100"/>
+    <path id="arcBottom" d="M 36 118 A 66 66 0 0 0 164 118"/>
+  </defs>
+  <circle cx="100" cy="100" r="98" fill="#FFFCF6" stroke="#171A14" stroke-width="2"/>
+  <circle cx="100" cy="100" r="60" fill="none" stroke="#171A14" stroke-width="2.5"/>
+  <text font-family="Arial Black, Arial, Helvetica, sans-serif" font-weight="900" font-size="15" letter-spacing="2.5" fill="#171A14">
+    <textPath href="#arcTop" startOffset="50%" text-anchor="middle">CASA MATCHA</textPath>
+  </text>
+  <text font-family="Arial Black, Arial, Helvetica, sans-serif" font-weight="900" font-size="13" letter-spacing="3" fill="#171A14">
+    <textPath href="#arcBottom" startOffset="50%" text-anchor="middle">AND COFFEE</textPath>
+  </text>
+  <!-- stars -->
+  <g fill="#171A14">
+    <path d="M62 86l1.6 4.4L68 92l-4.4 1.6L62 98l-1.6-4.4L56 92l4.4-1.6z"/>
+    <path d="M138 78l1.2 3.3 3.3 1.2-3.3 1.2-1.2 3.3-1.2-3.3-3.3-1.2 3.3-1.2z"/>
+    <path d="M132 124l1 2.6 2.6 1-2.6 1-1 2.6-1-2.6-2.6-1 2.6-1z"/>
+    <circle cx="70" cy="118" r="1.6"/>
+  </g>
+  <!-- moon -->
+  <path d="M60 138c10-9 24-12 40-12s30 3 40 12c-8 9-22 14-40 14s-32-5-40-14z" fill="#FFFCF6" stroke="#171A14" stroke-width="2.5" stroke-linejoin="round"/>
+  <g fill="#171A14"><circle cx="80" cy="136" r="2.4"/><circle cx="112" cy="140" r="2"/><circle cx="96" cy="131" r="1.6"/></g>
+  <!-- astronaut -->
+  <g stroke="#171A14" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="#FFFCF6">
+    <!-- legs -->
+    <path d="M88 122c-2 6-1 10 3 12M108 122c3 6 3 10-1 12"/>
+    <!-- body -->
+    <rect x="84" y="94" width="30" height="30" rx="9"/>
+    <!-- backpack strap -->
+    <path d="M91 100h16"/>
+    <!-- raised arm with cup -->
+    <path d="M112 102c7-4 12-10 13-18"/>
+    <!-- left arm -->
+    <path d="M85 104c-6 3-9 8-8 14"/>
+    <!-- helmet -->
+    <circle cx="99" cy="80" r="15"/>
+    <!-- visor -->
+    <path d="M89 78c2-6 7-8 12-8s9 3 10 9c-3 3-7 4-11 4s-8-1-11-5z" fill="#171A14"/>
+    <!-- visor glare -->
+    <path d="M94 74c2-1.5 4-2 6-2" stroke="#FFFCF6" stroke-width="1.5"/>
+    <!-- cup -->
+    <path d="M121 76h11l-1.5 12h-8z"/>
+    <path d="M120 76h13" />
+    <path d="M129 72c0-2 1-3 1-5" stroke-width="2"/>
+  </g>
+</svg>
