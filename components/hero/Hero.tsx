@@ -160,14 +160,14 @@ function HeroMotion() {
       });
 
       /* ---------- click the hero: play the pour ---------- */
-      const play = () => {
+      const play = (e: MouseEvent) => {
+        if ((e.target as Element | null)?.closest("a, button")) return;
         const st = tl.scrollTrigger;
         if (!st) return;
         const target = st.progress > 0.9 ? st.start : st.end;
         scrollToY(target, 3.2);
       };
-      const stage = root.querySelector<HTMLElement>(".hero-stage")!;
-      stage.addEventListener("click", play);
+      root.addEventListener("click", play);
 
       /* ---------- particles gate ---------- */
       const wantDust = isDesktop && !isLowPower() && canWebGL();
@@ -177,7 +177,7 @@ function HeroMotion() {
 
       return () => {
         window.removeEventListener("resize", size);
-        stage.removeEventListener("click", play);
+        root.removeEventListener("click", play);
         loader.destroy();
         io.disconnect();
         cancelDust();
@@ -193,9 +193,10 @@ function HeroMotion() {
       className="relative h-[100lvh] w-full overflow-hidden bg-ink text-cream"
       data-theme="dark"
       data-hero
+      data-cursor="play"
       aria-label="Casa Matcha"
     >
-      <div className="hero-stage hero-canvas-wrap" data-cursor="play">
+      <div className="hero-stage hero-canvas-wrap">
         <picture>
           <source media="(max-width: 767px)" srcSet={POSTER_MOBILE} width={540} height={960} />
           <img

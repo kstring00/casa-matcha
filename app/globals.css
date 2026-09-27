@@ -344,8 +344,11 @@ html.no-curtain {
   }
 }
 
-/* ---------- custom cursor ---------- */
-.cursor {
+/* ---------- custom cursor ----------
+   Two fixed layers: the dot snaps to the pointer, the ring trails it a little.
+   Cream dot + ink outline + soft shadow reads on any background (no blend mode). */
+.cursor,
+.cursor-ring {
   position: fixed;
   top: 0;
   left: 0;
@@ -357,13 +360,15 @@ html.no-curtain {
 }
 .cursor__dot {
   position: absolute;
-  top: -5px;
-  left: -5px;
-  width: 10px;
-  height: 10px;
+  top: -6px;
+  left: -6px;
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
   background: var(--cream);
-  mix-blend-mode: difference;
+  box-shadow:
+    0 0 0 1.5px var(--ink),
+    0 1px 6px rgba(0, 0, 0, 0.4);
 }
 .cursor__ring {
   position: absolute;
@@ -381,21 +386,30 @@ html.no-curtain {
   font-weight: 700;
   letter-spacing: 0.18em;
 }
-.cursor[data-state="link"] .cursor__ring {
+.cursor-ring[data-state="link"] .cursor__ring {
   background: var(--cream);
   color: var(--ink);
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   letter-spacing: 0;
   font-weight: 500;
+  box-shadow:
+    0 0 0 1.5px var(--ink),
+    0 8px 24px -8px rgba(0, 0, 0, 0.55);
 }
-.cursor[data-state="play"] .cursor__ring {
-  border: 1.5px solid var(--matcha);
-  color: var(--matcha);
-  background: rgba(23, 26, 20, 0.15);
-  backdrop-filter: blur(2px);
+.cursor-ring[data-state="play"] .cursor__ring {
+  border: 2px solid var(--matcha-light);
+  color: var(--cream);
+  background: rgba(23, 26, 20, 0.45);
+  backdrop-filter: blur(3px);
+  box-shadow:
+    0 0 0 1px rgba(23, 26, 20, 0.6),
+    inset 0 0 0 1px rgba(23, 26, 20, 0.5),
+    0 8px 30px -10px rgba(0, 0, 0, 0.6);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
 }
 @media (hover: hover) and (pointer: fine) {
-  html.cursor-on .cursor {
+  html.cursor-on .cursor,
+  html.cursor-on .cursor-ring {
     display: block;
   }
   html.cursor-on,
