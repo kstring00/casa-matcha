@@ -110,6 +110,7 @@ a 1200×630 crop of the same still).
 
 ## Deploy
 
-Vercel, zero config. `vercel.json` redirects `www.` to the apex domain: change both host names there and `url`
-in `content/site.ts` when the real domain is known. Frame sequences are served with immutable cache headers
-(`next.config.ts`).
+Vercel, production branch `main`. `vercel.json` pins `"framework": "nextjs"` (the project was first imported
+before the app existed, so the dashboard had stored "Other"); no environment variables are needed. It also
+redirects `www.` to the apex domain: change both host names there and `url` in `content/site.ts` when the real
+domain is known. Frame sequences are served with immutable cache headers (`next.config.ts`).
