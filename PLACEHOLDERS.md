@@ -1,5 +1,18 @@
 # Placeholders to replace before launch
 
+## Online ordering — VERIFY WITH OWNER
+- `content/ordering.ts` → **VERIFY WITH OWNER — confirm which location each listing belongs to and whether
+  Friendswood has its own.** Both listings are named "casa-matcha-houston" and are currently assigned to Webster:
+  - Pickup (joe coffee): `https://joe.coffee/locations/tx/houston/casa-matcha-houston/`
+  - Delivery (DoorDash): `https://www.doordash.com/store/casa-matcha-houston-35488877/`
+  - Friendswood has `pickup: null, delivery: null`, so no order buttons render for it until links are added.
+- `content/ordering.ts` → `joeSupportsScheduledOrders` is `true` (the pickup button reads "Order for later" while the
+  shop is closed). Set to `false` if scheduled pickups are off in joe.
+- Microsoft Clarity: set `NEXT_PUBLIC_CLARITY_ID` in Vercel → Project → Environment Variables to record the
+  `order_click_<provider>_<location>` events. Without it the events are no-ops and the privacy page omits the
+  analytics section.
+
+
 Everything below works today (every link resolves, nothing is empty) but should be swapped for the real thing.
 Items are grouped by the file you edit.
 

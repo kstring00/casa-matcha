@@ -12,6 +12,7 @@ import { toasts } from "@/lib/toasts";
 import { site } from "@/content/site";
 import { Magnetic } from "@/components/motion/Magnetic";
 import { HeroStatic } from "./HeroStatic";
+import { OrderAheadButton } from "@/components/order/OrderAheadButton";
 import desktopManifest from "@/public/hero/frames/manifest.json";
 import mobileManifest from "@/public/hero/frames-m/manifest.json";
 
@@ -261,17 +262,22 @@ function HeroMotion() {
         <div className="mt-5 flex flex-wrap items-center gap-3 md:mt-8 md:gap-4">
           <div className="hero-cta opacity-0">
             <Magnetic>
-              <Link href="/#locations" onClick={(e) => { e.preventDefault(); scrollToId("locations"); }} className="btn btn-primary" data-cursor="link">
-                Find a location <span className="btn__arrow" aria-hidden="true">→</span>
-              </Link>
+              <OrderAheadButton className="btn btn-primary" data-cursor="link">
+                Order ahead <span className="btn__arrow" aria-hidden="true">→</span>
+              </OrderAheadButton>
             </Magnetic>
           </div>
           <div className="hero-cta opacity-0">
             <Magnetic>
-              <Link href="/#drop" onClick={(e) => { e.preventDefault(); scrollToId("drop"); }} className="btn btn-outline text-cream" data-cursor="link">
-                See what&apos;s new
+              <Link href="/#locations" onClick={(e) => { e.preventDefault(); scrollToId("locations"); }} className="btn btn-outline text-cream" data-cursor="link">
+                Find a location
               </Link>
             </Magnetic>
+          </div>
+          <div className="hero-cta opacity-0">
+            <Link href="/#drop" onClick={(e) => { e.preventDefault(); scrollToId("drop"); }} className="inline-flex min-h-[44px] items-center gap-1 px-1 text-[0.9rem] font-semibold text-cream/85 underline-offset-4 hover:underline" data-cursor="link">
+              See what&apos;s new
+            </Link>
           </div>
         </div>
         <div className="hero-cue-end mt-6 hidden items-center gap-3 text-cream/70 opacity-0 md:flex">
