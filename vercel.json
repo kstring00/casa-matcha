@@ -1,0 +1,11 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "www.casamatchahtx.com" }],
+      "destination": "https://casamatchahtx.com/$1",
+      "permanent": true
+    }
+  ]
+}
