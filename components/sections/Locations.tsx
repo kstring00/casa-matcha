@@ -1,10 +1,13 @@
 "use client";
 import Image from "next/image";
 import { useRef, useState } from "react";
-import { gsap, ScrollTrigger, useIdleGSAP } from "@/lib/gsap";
+import { gsap, useIdleGSAP } from "@/lib/gsap";
 import { isFinePointer, prefersReducedMotion } from "@/lib/media";
 import { hoursRows } from "@/lib/hours";
 import { toasts } from "@/lib/toasts";
+import { useOpenStatus } from "@/lib/use-open-status";
+import { orderOptions, pickupLabel } from "@/lib/ordering";
+import { OrderLink } from "@/components/order/OrderLink";
 import { locations, directionsUrl, fullAddress, type Location } from "@/content/locations";
 import { SplitReveal } from "@/components/motion/SplitReveal";
 import { StatusPill } from "./StatusPill";
@@ -47,7 +50,6 @@ export function Locations() {
         }
       });
 
-      ScrollTrigger.create({ trigger: root, start: "top 55%", once: true, onEnter: () => toasts.hours() });
   }, section);
 
   return (
@@ -71,6 +73,8 @@ export function Locations() {
 function LocationCard({ loc }: { loc: Location }) {
   const [copied, setCopied] = useState(false);
   const address = fullAddress(loc);
+  const status = useOpenStatus(loc.hours, loc.short);
+  const options = orderOptions(loc.id);
 
   const copy = async () => {
     try {
@@ -96,7 +100,6 @@ function LocationCard({ loc }: { loc: Location }) {
         />
       </div>
       <div className="loc-text flex flex-col gap-5 p-6 md:p-9">
-        <StatusPill hours={loc.hours} name={loc.short} className="self-start" />
         <h3 className="font-display text-[2.2rem] leading-none font-black tracking-tight md:text-[2.6rem]">{loc.name}</h3>
         <button
           type="button"
@@ -139,6 +142,27 @@ function LocationCard({ loc }: { loc: Location }) {
             ))}
           </tbody>
         </table>
+        <div className="loc-order mt-1 flex flex-col gap-3 border-t border-ink/8 pt-5">
+          <StatusPill hours={loc.hours} name={loc.short} status={status} className="self-start" />
+          {options.length ? (
+            <div className="flex flex-wrap gap-3">
+              {options.map((opt) => (
+                <OrderLink
+                  key={opt.kind}
+                  location={loc.id}
+                  kind={opt.kind}
+                  className={opt.kind === "pickup" ? "btn btn-primary" : "btn btn-outline"}
+                  aria-label={`${opt.kind === "pickup" ? pickupLabel(!!status?.isOpen) : "Delivery"} from Casa Matcha ${loc.name} on ${opt.provider === "joe" ? "joe coffee" : "DoorDash"} (opens in a new tab)`}
+                >
+                  {opt.kind === "pickup" ? pickupLabel(!!status?.isOpen) : "Delivery"}
+                  <span className="btn__arrow" aria-hidden="true">↗</span>
+                </OrderLink>
+              ))}
+            </div>
+          ) : (
+            <p className="text-[0.9rem] text-ink/70">Online ordering for {loc.name} is coming soon. Order at the counter, or order from Webster.</p>
+          )}
+        </div>
       </div>
     </article>
   );

@@ -1,5 +1,7 @@
 import Image from "next/image";
+import Link from "next/link";
 import { site } from "@/content/site";
+import { OrderAheadButton } from "@/components/order/OrderAheadButton";
 
 /** prefers-reduced-motion hero: the final splash still, headline and CTAs. No pin, no scrub. */
 export function HeroStatic() {
@@ -24,13 +26,16 @@ export function HeroStatic() {
         <h2 className="font-display mt-8 text-[clamp(34px,9vw,56px)] leading-[0.92] font-black tracking-[-0.03em] md:text-[clamp(48px,5.5vw,92px)]">
           Real matcha. <br /> Real coffee. <br /> Real familia.
         </h2>
-        <div className="mt-8 flex flex-wrap gap-3">
-          <a href="#locations" className="btn btn-primary">
-            Find a location <span aria-hidden="true">→</span>
-          </a>
-          <a href="#drop" className="btn btn-outline text-cream">
+        <div className="mt-8 flex flex-wrap items-center gap-3">
+          <OrderAheadButton className="btn btn-primary">
+            Order ahead <span aria-hidden="true">→</span>
+          </OrderAheadButton>
+          <Link href="/#locations" className="btn btn-outline text-cream">
+            Find a location
+          </Link>
+          <Link href="/#drop" className="inline-flex min-h-[44px] items-center px-1 text-[0.9rem] font-semibold text-cream/85 underline-offset-4 hover:underline">
             See what&apos;s new
-          </a>
+          </Link>
         </div>
       </div>
     </section>

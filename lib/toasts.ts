@@ -7,11 +7,10 @@ import { createElement } from "react";
 import { BrandToast, type BrandToastProps } from "@/components/toast/BrandToast";
 import { onceInSession } from "./session";
 import { scrollToId } from "./scroll";
-import { getStatus, relativeDayLabel, daysUntil } from "./hours";
-import { getLocation, directionsUrl, defaultLocationId, type LocationId } from "@/content/locations";
+import { relativeDayLabel, daysUntil } from "./hours";
 import { events } from "@/content/events";
 
-export type ToastKey = "drop" | "hours" | "copied" | "event" | "lost";
+export type ToastKey = "drop" | "copied" | "event" | "lost";
 export const TOAST_DURATION = 6500;
 
 export async function brandToast(opts: Omit<BrandToastProps, "toastId" | "duration"> & { duration?: number }) {
@@ -42,16 +41,11 @@ export const toasts = {
       }),
     ),
 
-  /** #2 — when Locations enters view. Built from live hours. */
-  hours: (force = false, locationId: LocationId = defaultLocationId) =>
-    fire("hours", force, () => {
-      const loc = getLocation(locationId);
-      const s = getStatus(loc.hours, loc.short);
-      brandToast({
-        title: s.sentence,
-        body: s.isOpen ? `${loc.street}, ${loc.city} · come say hola.` : `${loc.short} · ${s.label}`,
-        action: { label: "Directions", href: directionsUrl(loc), external: true },
-      });
+  /** #2 — every order click (not session-capped): "Opening joe coffee…" for 1.5s. */
+  opening: (providerName: string) =>
+    brandToast({
+      title: `Opening ${providerName}…`,
+      duration: 1500,
     }),
 
   /** #3 — after an address is copied. */

@@ -26,6 +26,7 @@ resets the once-per-session flags, replays the intro curtain).
 | `content/events.ts` | DJ night series name, blurb, next date, Eventbrite URL |
 | `content/reviews.ts` | Three Google reviews (name, quote, rating) |
 | `content/instagram.ts` | Handle, profile URL, six grid images |
+| `content/ordering.ts` | Online ordering links per location: pickup (joe coffee) and delivery (DoorDash). `null` hides that button |
 
 All of these are plain TypeScript objects. Save the file, the dev server reloads.
 
@@ -49,6 +50,15 @@ and the schema.org opening hours all read from here.
 `content/events.ts` → `next.date` (ISO with the `-05:00`/`-06:00` Central offset) and `next.ticketsUrl`.
 The "DJ night this Friday" toast only fires when that date is within the next 7 days, so an old date silently
 switches the toast off.
+
+### Online ordering
+
+`content/ordering.ts` holds one entry per location with a `pickup` (joe coffee) and a `delivery` (DoorDash) URL.
+Set either to `null` to hide that button everywhere: hero "Order ahead", the sticky mobile bar, the location
+cards, "Order this →" under each drop item, the footer, the order chooser sheet and the schema.org `OrderAction`.
+When a location has exactly one link, "Order ahead" goes straight to it; with two it opens the chooser. Every
+order click fires a Microsoft Clarity event named `order_click_<provider>_<location>` (set
+`NEXT_PUBLIC_CLARITY_ID` to enable Clarity) and shows a short "Opening joe coffee…" toast.
 
 ### Reviews
 

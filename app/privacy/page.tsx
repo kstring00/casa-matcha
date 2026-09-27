@@ -26,12 +26,20 @@ export default function PrivacyPage() {
             </section>
             <section>
               <h2 className="font-display text-[1.6rem] font-bold">Cookies and storage</h2>
-              <p className="mt-2">We do not use tracking or advertising cookies. The site stores a few small flags in your browser&apos;s session storage (for example, whether you have already seen the intro animation or a notification) so we do not repeat them. That data never leaves your device and clears when you close the tab.</p>
+              <p className="mt-2">We do not use advertising cookies. The site stores a few small flags in your browser&apos;s session storage (for example, whether you have already seen the intro animation or a notification) so we do not repeat them. That data never leaves your device and clears when you close the tab.</p>
             </section>
             <section>
               <h2 className="font-display text-[1.6rem] font-bold">Third-party links</h2>
-              <p className="mt-2">Buttons on this site open Google Maps (directions), Instagram (our profile), and Eventbrite (tickets). Once you leave, those services&apos; own privacy policies apply. Your phone&apos;s dialer handles &ldquo;Call&rdquo; buttons; we never see the call.</p>
+              <p className="mt-2">Buttons on this site open Google Maps (directions), Instagram (our profile), Eventbrite (tickets), and our ordering partners joe coffee (pickup) and DoorDash (delivery). Once you leave, those services&apos; own privacy policies apply, and any order you place is handled by them, not by this site. Your phone&apos;s dialer handles &ldquo;Call&rdquo; buttons; we never see the call.</p>
             </section>
+            {process.env.NEXT_PUBLIC_CLARITY_ID && (
+              <section>
+                <h2 className="font-display text-[1.6rem] font-bold">Analytics</h2>
+                <p className="mt-2">We use Microsoft Clarity to understand how people use the site, for example how many visitors tap an order button. Clarity collects usage data such as pages viewed, clicks and scrolling, and may set cookies. It is governed by the{" "}
+                  <a href="https://privacy.microsoft.com/privacystatement" target="_blank" rel="noopener noreferrer" className="font-semibold underline">Microsoft Privacy Statement</a>.
+                </p>
+              </section>
+            )}
             <section>
               <h2 className="font-display text-[1.6rem] font-bold">Hours and location features</h2>
               <p className="mt-2">Open/closed status is calculated in your browser from our published hours and the current time in Central Time. We do not request or store your location.</p>

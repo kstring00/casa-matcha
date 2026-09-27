@@ -1,23 +1,14 @@
 "use client";
-import { useEffect, useState } from "react";
 import type { WeekHours } from "@/content/locations";
-import { getStatus, type OpenStatus } from "@/lib/hours";
+import type { OpenStatus } from "@/lib/hours";
+import { useOpenStatus } from "@/lib/use-open-status";
 
-/** Live "Open · closes 6:00 pm" pill, computed client-side in America/Chicago and refreshed every minute. */
-export function StatusPill({ hours, name, className = "" }: { hours: WeekHours; name: string; className?: string }) {
-  const [status, setStatus] = useState<OpenStatus | null>(null);
+type Props = { hours: WeekHours; name: string; className?: string; status?: OpenStatus | null };
 
-  useEffect(() => {
-    const tick = () => setStatus(getStatus(hours, name));
-    tick();
-    const id = window.setInterval(tick, 60_000);
-    const onVis = () => document.visibilityState === "visible" && tick();
-    document.addEventListener("visibilitychange", onVis);
-    return () => {
-      window.clearInterval(id);
-      document.removeEventListener("visibilitychange", onVis);
-    };
-  }, [hours, name]);
+/** Live "Open · closes 6:00 pm" pill. Pass `status` to share one computation with siblings. */
+export function StatusPill({ hours, name, className = "", status: given }: Props) {
+  const own = useOpenStatus(hours, name);
+  const status = given === undefined ? own : given;
 
   const tone = !status ? "bg-ink/10 text-ink/80" : status.isOpen ? (status.closingSoon ? "bg-caramel/15 text-[#7a4210]" : "bg-matcha/12 text-matcha-deep") : "bg-ink/8 text-ink/85";
   const dot = !status ? "bg-ink/30" : status.isOpen ? (status.closingSoon ? "bg-caramel" : "bg-matcha") : "bg-ink/40";
