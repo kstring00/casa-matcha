@@ -12,7 +12,7 @@ import { toasts } from "@/lib/toasts";
 import { site } from "@/content/site";
 import { Magnetic } from "@/components/motion/Magnetic";
 import { HeroStatic } from "./HeroStatic";
-import { OrderAheadButton } from "@/components/order/OrderAheadButton";
+import { OrderCta } from "@/components/order/OrderCta";
 import desktopManifest from "@/public/hero/frames/manifest.json";
 import mobileManifest from "@/public/hero/frames-m/manifest.json";
 
@@ -262,9 +262,9 @@ function HeroMotion() {
         <div className="mt-5 flex flex-wrap items-center gap-3 md:mt-8 md:gap-4">
           <div className="hero-cta opacity-0">
             <Magnetic>
-              <OrderAheadButton className="btn btn-primary" data-cursor="link">
+              <OrderCta className="btn btn-primary" data-cursor="link">
                 Order ahead <span className="btn__arrow" aria-hidden="true">→</span>
-              </OrderAheadButton>
+              </OrderCta>
             </Magnetic>
           </div>
           <div className="hero-cta opacity-0">

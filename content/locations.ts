@@ -28,7 +28,7 @@ export type Location = {
   city: string;
   state: string;
   zip: string;
-  /** PLACEHOLDER numbers (555 exchange). Replace with the real lines. */
+  /** E.164, used in tel: links and JSON-LD. */
   phone: string;
   phoneDisplay: string;
   /** Approximate. Verify against Google Maps before launch. */
@@ -47,8 +47,8 @@ export const locations: Location[] = [
     city: "Friendswood",
     state: "TX",
     zip: "77546",
-    phone: "+12815550142",
-    phoneDisplay: "(281) 555-0142",
+    phone: "+12819934437",
+    phoneDisplay: "(281) 993-4437",
     geo: { lat: 29.5141, lng: -95.1893 },
     hours: defaultHours,
     image: {
@@ -66,8 +66,8 @@ export const locations: Location[] = [
     city: "Webster",
     state: "TX",
     zip: "77058",
-    phone: "+12815550187",
-    phoneDisplay: "(281) 555-0187",
+    phone: "+18323794041",
+    phoneDisplay: "(832) 379-4041",
     geo: { lat: 29.5523, lng: -95.1012 },
     callout: "Tucked in a small entrance off NASA Pkwy — look for the astronaut on the door.",
     hours: defaultHours,

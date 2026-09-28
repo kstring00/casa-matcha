@@ -1,44 +1,22 @@
 /**
- * Online ordering links, keyed by location. Casa Matcha takes orders through
- * two services; the site only links to them.
- *
- *   pickup   → joe coffee (primary: lower fees for the shop, has loyalty)
- *   delivery → DoorDash (secondary)
- *
- * A null link hides that button for that location everywhere on the site.
- * VERIFY WITH OWNER: confirm which location each listing belongs to and
- * whether Friendswood has its own (see PLACEHOLDERS.md).
+ * Online ordering. The site runs a demo pickup flow at /order until Clover
+ * Online Ordering is switched on. When the owner sends a location's Clover
+ * ordering link, put it in `clover` below and every Order button for that
+ * location goes straight to Clover instead of the demo.
  */
 import type { LocationId } from "./locations";
 
-export type OrderKind = "pickup" | "delivery";
-export type OrderProvider = "joe" | "doordash";
-
-export type OrderingLinks = { pickup: string | null; delivery: string | null };
-
-export const ordering: Record<LocationId, OrderingLinks> = {
-  webster: {
-    pickup: "https://joe.coffee/locations/tx/houston/casa-matcha-houston/",
-    delivery: "https://www.doordash.com/store/casa-matcha-houston-35488877/",
-  },
-  friendswood: {
-    pickup: null,
-    delivery: null,
-  },
-};
-
-export const providers: Record<OrderProvider, { name: string; kind: OrderKind; blurb: string }> = {
-  joe: { name: "joe coffee", kind: "pickup", blurb: "Order ahead, skip the line. Earn loyalty points." },
-  doordash: { name: "DoorDash", kind: "delivery", blurb: "Delivered to your door." },
-};
-
-export const providerFor: Record<OrderKind, OrderProvider> = { pickup: "joe", delivery: "doordash" };
-
-/**
- * joe coffee lets guests schedule a pickup time, so when the shop is closed the
- * pickup button reads "Order for later". Set to false if the owner turns
- * scheduling off. VERIFY WITH OWNER.
- */
-export const joeSupportsScheduledOrders = true;
-
-export const orderingFinePrint = "Ordering is handled by joe coffee and DoorDash.";
+export const ordering = {
+  demoPath: "/order",
+  /** Clover Online Ordering links per location. null = not live yet (demo flow). */
+  clover: {
+    webster: null,
+    friendswood: null,
+  } as Record<LocationId, string | null>,
+  /** Sales tax applied in the demo cart. */
+  taxRate: 0.0825,
+  pickupFeeCents: 0,
+  tipPercents: [0, 10, 15, 20] as const,
+  asapMinutes: 10,
+  finePrint: "Payment happens in Clover, not on this site.",
+} as const;

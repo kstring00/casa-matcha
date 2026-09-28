@@ -12,8 +12,6 @@ export function DemoPanel() {
 
   const items: { label: string; run: () => void }[] = [
     { label: "1 · Pumpkin Drop", run: () => toasts.drop(true) },
-    { label: "2 · Opening joe coffee…", run: () => toasts.opening("joe coffee") },
-    { label: "2 · Opening DoorDash…", run: () => toasts.opening("DoorDash") },
     { label: "3 · Address copied", run: () => toasts.copied(true, "1199 E NASA Pkwy, Webster, TX 77058") },
     { label: "4 · DJ night", run: () => toasts.event(true) },
     { label: "5 · Lost in space", run: () => toasts.lost(true) },

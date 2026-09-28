@@ -1,20 +1,14 @@
 # Placeholders to replace before launch
 
-## Online ordering — VERIFY WITH OWNER
-- `content/ordering.ts` → **VERIFY WITH OWNER — confirm which location each listing belongs to and whether
-  Friendswood has its own.** Both listings are named "casa-matcha-houston" and are currently assigned to Webster:
-  - Pickup (joe coffee): `https://joe.coffee/locations/tx/houston/casa-matcha-houston/`
-  - Delivery (DoorDash): `https://www.doordash.com/store/casa-matcha-houston-35488877/`
-  - Friendswood has `pickup: null, delivery: null`, so no order buttons render for it until links are added.
-- `content/ordering.ts` → `joeSupportsScheduledOrders` is `true` (the pickup button reads "Order for later" while the
-  shop is closed). Set to `false` if scheduled pickups are off in joe.
+## Online ordering (demo flow at /order)
+- `content/ordering.ts` → `clover.webster` and `clover.friendswood` are `null`. When each location's Clover Online
+  Ordering link arrives, paste it there: every Order button for that location then goes straight to Clover, the
+  `/order` demo stops being reachable from it, and the schema.org `OrderAction` switches on.
+- `content/order-menu.ts` → **SAMPLE PRICES** and sample size/milk modifiers. The real menu, prices and modifiers
+  come from Clover once Online Ordering is on. The flow says so under its Menu headline.
 - Microsoft Clarity: set `NEXT_PUBLIC_CLARITY_ID` in Vercel → Project → Environment Variables to record the
-  `order_click_<provider>_<location>` events. Without it the events are no-ops and the privacy page omits the
-  analytics section.
-
-
-Everything below works today (every link resolves, nothing is empty) but should be swapped for the real thing.
-Items are grouped by the file you edit.
+  `order_click_<location>` events. Without it the events are no-ops and the privacy page omits the analytics
+  section.
 
 ## Domain
 - `content/site.ts` → `url: "https://casamatchahtx.com"` — placeholder domain (the Instagram handle). Also used for
@@ -22,8 +16,6 @@ Items are grouped by the file you edit.
 - `vercel.json` → the `www.casamatchahtx.com` → `casamatchahtx.com` redirect. Update both host names.
 
 ## Locations (`content/locations.ts`)
-- **Phone numbers**: both are `555` placeholders (`(281) 555-0142` Friendswood, `(281) 555-0187` Webster). Replace
-  `phone` (E.164, used in `tel:` links and JSON-LD) and `phoneDisplay`.
 - **Geo coordinates**: approximate from the street addresses. Verify against Google Maps (right-click → copy
   coordinates) so the LocalBusiness schema is exact.
 - Addresses and hours match the Instagram bio and the "Hours of operation" post. Confirm holiday hours.

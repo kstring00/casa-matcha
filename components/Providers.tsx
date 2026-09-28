@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { Cursor } from "@/components/Cursor";
 import { afterIntroIdle } from "@/lib/bus";
-import { OrderSheet } from "@/components/order/OrderSheet";
 import { Clarity } from "@/components/Clarity";
 
 const BrandToaster = dynamic(() => import("@/components/toast/BrandToaster").then((m) => m.BrandToaster), { ssr: false });
@@ -25,7 +24,6 @@ export function Providers() {
     <>
       <SmoothScroll />
       <Cursor />
-      <OrderSheet />
       <Clarity />
       {ready && <BrandToaster />}
       {ready && <DemoPanel />}

@@ -3,10 +3,9 @@ import { locations, fullAddress } from "@/content/locations";
 import { openingHoursSpec } from "./hours";
 import { ordering } from "@/content/ordering";
 
-function orderAction(id: keyof typeof ordering) {
-  const url = ordering[id].pickup ?? ordering[id].delivery;
+function orderAction(id: keyof typeof ordering.clover) {
+  const url = ordering.clover[id];
   if (!url) return {};
-  const isPickup = !!ordering[id].pickup;
   return {
     potentialAction: {
       "@type": "OrderAction",
@@ -16,7 +15,7 @@ function orderAction(id: keyof typeof ordering) {
         actionPlatform: ["http://schema.org/DesktopWebPlatform", "http://schema.org/MobileWebPlatform"],
         inLanguage: "en-US",
       },
-      deliveryMethod: isPickup ? "http://purl.org/goodrelations/v1#DeliveryModePickUp" : "http://purl.org/goodrelations/v1#DeliveryModeOwnFleet",
+      deliveryMethod: "http://purl.org/goodrelations/v1#DeliveryModePickUp",
     },
   };
 }

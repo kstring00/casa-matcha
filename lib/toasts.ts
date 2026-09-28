@@ -41,12 +41,6 @@ export const toasts = {
       }),
     ),
 
-  /** #2 — every order click (not session-capped): "Opening joe coffee…" for 1.5s. */
-  opening: (providerName: string) =>
-    brandToast({
-      title: `Opening ${providerName}…`,
-      duration: 1500,
-    }),
 
   /** #3 — after an address is copied. */
   copied: (force = false, address?: string) =>

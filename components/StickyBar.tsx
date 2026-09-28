@@ -1,15 +1,17 @@
 "use client";
+import { usePathname } from "next/navigation";
 import { directionsUrl, getLocation, locations } from "@/content/locations";
 import { useSelectedLocation } from "@/lib/location-store";
-import { OrderAheadButton } from "@/components/order/OrderAheadButton";
+import { OrderCta } from "@/components/order/OrderCta";
 
 /**
  * Mobile-only bottom bar: Order (filled) · Directions · Call for the selected
- * location, plus the toggle chip. Order hides itself when the selected
- * location has no order links.
+ * location, plus the toggle chip. Hidden on /order, which has its own bar.
  */
 export function StickyBar() {
+  const pathname = usePathname();
   const [id, setId] = useSelectedLocation();
+  if (pathname?.startsWith("/order")) return null;
   const loc = getLocation(id);
   const other = locations.find((l) => l.id !== id) ?? loc;
 
@@ -27,9 +29,9 @@ export function StickyBar() {
             <path d="M3 5h8.5L9.5 3M13 11H4.5l2 2" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </button>
-        <OrderAheadButton location={id} className="btn btn-primary h-11 !min-h-0 flex-1 !px-3 text-[0.88rem]">
+        <OrderCta location={id} className="btn btn-primary h-11 !min-h-0 flex-1 !px-3 text-[0.88rem]">
           Order
-        </OrderAheadButton>
+        </OrderCta>
         <a
           href={directionsUrl(loc)}
           target="_blank"
@@ -39,7 +41,7 @@ export function StickyBar() {
         >
           Directions
         </a>
-        <a href={`tel:${loc.phone}`} className="btn btn-outline h-11 !min-h-0 shrink-0 !px-3 text-[0.85rem] text-cream" aria-label={`Call Casa Matcha ${loc.name}`}>
+        <a href={`tel:${loc.phone}`} className="btn btn-outline h-11 !min-h-0 shrink-0 !px-3 text-[0.85rem] text-cream" aria-label={`Call ${loc.short} · ${loc.phoneDisplay}`}>
           <svg viewBox="0 0 20 20" className="bar-call-icon h-4 w-4" aria-hidden="true">
             <path d="M6.6 3.2l2 3.1-1.5 1.6a11 11 0 004.9 4.9l1.6-1.5 3.1 2-1 2.5c-6.3.6-12-5.1-11.6-11.6z" fill="currentColor" />
           </svg>

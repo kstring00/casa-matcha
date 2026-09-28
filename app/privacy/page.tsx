@@ -30,7 +30,8 @@ export default function PrivacyPage() {
             </section>
             <section>
               <h2 className="font-display text-[1.6rem] font-bold">Third-party links</h2>
-              <p className="mt-2">Buttons on this site open Google Maps (directions), Instagram (our profile), Eventbrite (tickets), and our ordering partners joe coffee (pickup) and DoorDash (delivery). Once you leave, those services&apos; own privacy policies apply, and any order you place is handled by them, not by this site. Your phone&apos;s dialer handles &ldquo;Call&rdquo; buttons; we never see the call.</p>
+              <p className="mt-2">Buttons on this site open Google Maps (directions), Instagram (our profile) and Eventbrite (tickets). Once you leave, those services&apos; own privacy policies apply. Your phone&apos;s dialer handles &ldquo;Call&rdquo; buttons; we never see the call.</p>
+              <p className="mt-2">The &ldquo;Order ahead&rdquo; pages on this site are a demonstration: your choices stay in your browser&apos;s memory for that visit only, we ask for no name, phone number or card, and nothing is charged. When Clover Online Ordering is switched on, ordering and payment happen on Clover under Clover&apos;s own privacy policy.</p>
             </section>
             {process.env.NEXT_PUBLIC_CLARITY_ID && (
               <section>
