@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { site } from "@/content/site";
-import { OrderAheadButton } from "@/components/order/OrderAheadButton";
+import { OrderCta } from "@/components/order/OrderCta";
 
 /** prefers-reduced-motion hero: the final splash still, headline and CTAs. No pin, no scrub. */
 export function HeroStatic() {
@@ -27,9 +27,9 @@ export function HeroStatic() {
           Real matcha. <br /> Real coffee. <br /> Real familia.
         </h2>
         <div className="mt-8 flex flex-wrap items-center gap-3">
-          <OrderAheadButton className="btn btn-primary">
+          <OrderCta className="btn btn-primary">
             Order ahead <span aria-hidden="true">→</span>
-          </OrderAheadButton>
+          </OrderCta>
           <Link href="/#locations" className="btn btn-outline text-cream">
             Find a location
           </Link>

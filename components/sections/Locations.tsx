@@ -6,8 +6,7 @@ import { isFinePointer, prefersReducedMotion } from "@/lib/media";
 import { hoursRows } from "@/lib/hours";
 import { toasts } from "@/lib/toasts";
 import { useOpenStatus } from "@/lib/use-open-status";
-import { orderOptions, pickupLabel } from "@/lib/ordering";
-import { OrderLink } from "@/components/order/OrderLink";
+import { OrderCta } from "@/components/order/OrderCta";
 import { locations, directionsUrl, fullAddress, type Location } from "@/content/locations";
 import { SplitReveal } from "@/components/motion/SplitReveal";
 import { StatusPill } from "./StatusPill";
@@ -74,7 +73,6 @@ function LocationCard({ loc }: { loc: Location }) {
   const [copied, setCopied] = useState(false);
   const address = fullAddress(loc);
   const status = useOpenStatus(loc.hours, loc.short);
-  const options = orderOptions(loc.id);
 
   const copy = async () => {
     try {
@@ -125,8 +123,8 @@ function LocationCard({ loc }: { loc: Location }) {
           <a href={directionsUrl(loc)} target="_blank" rel="noopener noreferrer" className="btn btn-primary" aria-label={`Directions to Casa Matcha ${loc.name} (opens Google Maps)`}>
             Directions <span className="btn__arrow" aria-hidden="true">→</span>
           </a>
-          <a href={`tel:${loc.phone}`} className="btn btn-outline" aria-label={`Call Casa Matcha ${loc.name} at ${loc.phoneDisplay}`}>
-            {loc.phoneDisplay}
+          <a href={`tel:${loc.phone}`} className="btn btn-outline" aria-label={`Call ${loc.short} · ${loc.phoneDisplay}`}>
+            Call {loc.short} · {loc.phoneDisplay}
           </a>
         </div>
         <table className="mt-1 w-full text-[0.92rem]">
@@ -144,24 +142,12 @@ function LocationCard({ loc }: { loc: Location }) {
         </table>
         <div className="loc-order mt-1 flex flex-col gap-3 border-t border-ink/8 pt-5">
           <StatusPill hours={loc.hours} name={loc.short} status={status} className="self-start" />
-          {options.length ? (
-            <div className="flex flex-wrap gap-3">
-              {options.map((opt) => (
-                <OrderLink
-                  key={opt.kind}
-                  location={loc.id}
-                  kind={opt.kind}
-                  className={opt.kind === "pickup" ? "btn btn-primary" : "btn btn-outline"}
-                  aria-label={`${opt.kind === "pickup" ? pickupLabel(!!status?.isOpen) : "Delivery"} from Casa Matcha ${loc.name} on ${opt.provider === "joe" ? "joe coffee" : "DoorDash"} (opens in a new tab)`}
-                >
-                  {opt.kind === "pickup" ? pickupLabel(!!status?.isOpen) : "Delivery"}
-                  <span className="btn__arrow" aria-hidden="true">↗</span>
-                </OrderLink>
-              ))}
-            </div>
-          ) : (
-            <p className="text-[0.9rem] text-ink/70">Online ordering for {loc.name} is coming soon. Order at the counter, or order from Webster.</p>
-          )}
+          <div className="flex flex-wrap items-center gap-3">
+            <OrderCta location={loc.id} className="btn btn-primary" aria-label={`Order pickup from Casa Matcha ${loc.name}`}>
+              Order pickup <span className="btn__arrow" aria-hidden="true">→</span>
+            </OrderCta>
+            <p className="text-[0.85rem] text-ink/65">Ready when you walk in. No fee.</p>
+          </div>
         </div>
       </div>
     </article>

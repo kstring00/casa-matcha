@@ -26,7 +26,8 @@ resets the once-per-session flags, replays the intro curtain).
 | `content/events.ts` | DJ night series name, blurb, next date, Eventbrite URL |
 | `content/reviews.ts` | Three Google reviews (name, quote, rating) |
 | `content/instagram.ts` | Handle, profile URL, six grid images |
-| `content/ordering.ts` | Online ordering links per location: pickup (joe coffee) and delivery (DoorDash). `null` hides that button |
+| `content/ordering.ts` | Ordering: Clover links per location (`null` = demo flow at `/order`), tax rate, tip options |
+| `content/order-menu.ts` | The 8 demo items, sample prices and size/milk modifiers shown at `/order` |
 
 All of these are plain TypeScript objects. Save the file, the dev server reloads.
 
@@ -53,12 +54,15 @@ switches the toast off.
 
 ### Online ordering
 
-`content/ordering.ts` holds one entry per location with a `pickup` (joe coffee) and a `delivery` (DoorDash) URL.
-Set either to `null` to hide that button everywhere: hero "Order ahead", the sticky mobile bar, the location
-cards, "Order this →" under each drop item, the footer, the order chooser sheet and the schema.org `OrderAction`.
-When a location has exactly one link, "Order ahead" goes straight to it; with two it opens the chooser. Every
-order click fires a Microsoft Clarity event named `order_click_<provider>_<location>` (set
-`NEXT_PUBLIC_CLARITY_ID` to enable Clarity) and shows a short "Opening joe coffee…" toast.
+Every Order button (hero, sticky mobile bar, location cards, "Order this →" under drop items, footer) goes to
+the demo pickup flow at `/order`: Location · Menu · Cart · Checkout, with a DEMO badge, sample prices, tax at
+8.25%, a $0 pickup fee and tips. Nothing is stored or charged; state lives in memory for the visit. The checkout
+step and the "how this goes live" link explain the Clover switch-on to the owners.
+
+To go live, paste each location's Clover Online Ordering link into `content/ordering.ts` → `clover`. Buttons for
+that location then open Clover directly (new tab) and the schema.org `OrderAction` appears in that location's
+JSON-LD. Every order click fires a Microsoft Clarity event `order_click_<location>` when `NEXT_PUBLIC_CLARITY_ID`
+is set.
 
 ### Reviews
 

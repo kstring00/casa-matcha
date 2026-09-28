@@ -9,10 +9,7 @@ import { revealUp } from "@/lib/motion";
 import { scrollToY } from "@/lib/scroll";
 import { drop } from "@/content/drop";
 import { SplitReveal } from "@/components/motion/SplitReveal";
-import { OrderLink } from "@/components/order/OrderLink";
-import { useSelectedLocation } from "@/lib/location-store";
-import { pickupLocation } from "@/lib/ordering";
-import { getLocation } from "@/content/locations";
+import { OrderCta } from "@/components/order/OrderCta";
 
 const DropImageGL = dynamic(() => import("./DropImageGL"), { ssr: false });
 
@@ -117,8 +114,6 @@ export function Drop() {
 
 function DropCard({ item, index }: { item: Item; index: number }) {
   const gl = useWebGLOk();
-  const [selected] = useSelectedLocation();
-  const orderLoc = pickupLocation(selected);
   return (
     <article className="drop-card w-[78vw] shrink-0 snap-center md:w-[min(34vw,42vh)]" role="listitem">
       <div className="group relative aspect-[3/4] overflow-hidden rounded-3xl bg-ink/30">
@@ -138,16 +133,13 @@ function DropCard({ item, index }: { item: Item; index: number }) {
       </div>
       <h3 className="font-display mt-5 text-[1.6rem] leading-tight font-bold md:text-[1.9rem]">{item.name}</h3>
       <p className="mt-2 max-w-[36ch] text-[0.98rem] leading-relaxed text-cream/75">{item.line}</p>
-      {orderLoc && (
-        <OrderLink
-          location={orderLoc}
-          kind="pickup"
-          className="mt-3 inline-flex min-h-[44px] items-center gap-1.5 text-[0.9rem] font-semibold text-matcha-light underline-offset-4 hover:underline"
-          aria-label={`Order ${item.name} for pickup at Casa Matcha ${getLocation(orderLoc).name} on joe coffee (opens in a new tab)`}
-        >
-          Order this <span className="btn__arrow" aria-hidden="true">→</span>
-        </OrderLink>
-      )}
+      <OrderCta
+        item={item.id}
+        className="mt-3 inline-flex min-h-[44px] items-center gap-1.5 text-[0.9rem] font-semibold text-matcha-light underline-offset-4 hover:underline"
+        aria-label={`Order ${item.name} for pickup`}
+      >
+        Order this <span className="btn__arrow" aria-hidden="true">→</span>
+      </OrderCta>
     </article>
   );
 }

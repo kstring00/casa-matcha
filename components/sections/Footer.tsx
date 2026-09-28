@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Logo } from "@/components/brand/Logo";
 import { site } from "@/content/site";
 import { locations, hoursSummary, directionsUrl } from "@/content/locations";
-import { OrderOnlineLink } from "@/components/order/OrderOnlineLink";
+import { OrderCta } from "@/components/order/OrderCta";
 
 export function Footer({ compact = false }: { compact?: boolean }) {
   return (
@@ -30,8 +30,8 @@ export function Footer({ compact = false }: { compact?: boolean }) {
                 <br />
                 {l.city}, {l.state} {l.zip}
               </a>
-              <a href={`tel:${l.phone}`} className="mt-2 block hover:underline">
-                {l.phoneDisplay}
+              <a href={`tel:${l.phone}`} className="mt-2 block hover:underline" aria-label={`Call ${l.short} · ${l.phoneDisplay}`}>
+                {l.short} · {l.phoneDisplay}
               </a>
             </div>
           ))}
@@ -49,7 +49,7 @@ export function Footer({ compact = false }: { compact?: boolean }) {
         </div>
         <div className="mt-14 flex flex-col gap-4 border-t border-cream/15 pt-6 text-[0.85rem] text-cream/80 md:flex-row md:items-center md:justify-between">
           <div className="flex flex-wrap gap-x-6 gap-y-2">
-            <OrderOnlineLink className="font-semibold text-matcha-light hover:text-cream" />
+            <OrderCta className="font-semibold text-matcha-light hover:text-cream">Order online</OrderCta>
             <a href={site.instagram.url} target="_blank" rel="noopener noreferrer" className="hover:text-cream">
               Instagram {site.instagram.handle}
             </a>
